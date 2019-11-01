@@ -1,5 +1,4 @@
 matplotlib==3.1.1
 numpy==1.17.2
 pandas==0.25.1
-reportlab==3.5.26
 xlrd==1.2.0

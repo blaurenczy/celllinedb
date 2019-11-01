@@ -1,0 +1,84 @@
+{
+    "main": {
+        "db_path": "N:/NUC/COMMUN/LABORATOIRES/LABO Recherche/Cell_Line_Database_2019-11-01_BL.xlsx",
+        "logo_path": "chuv_logo.jpg",
+        "pdf_file_path": "celllinedb.pdf"
+    },
+    "clean": {
+        "organism": {
+            "human": ["human"],
+            "mouse": ["mouse", "musmusculus"],
+            "rat": ["rat"]
+        },
+        "tissue": {
+            "blood": ["blood"],
+            "brain": ["brain"],
+            "breast": ["mammary"],
+            "cervix": ["cervix"],
+            "colon": ["colon"],
+            "lymphocyte": ["lymphocyte", "lymphoblast"],
+            "ovary": ["ovary"],
+            "pancreas": ["pancreas"],
+            "prostate": ["prostate"],
+            "skin": ["skin"],
+            "uterus": ["uterus"]
+        },
+        "disease": {
+            "breast cancer": ["breast cancer"],
+            "carcinoma": ["carcinoma"],
+            "glioblastoma": ["glioblastoma"],
+            "leukemia": ["leukemia"],
+            "lymphoma": ["lymphoma"],
+            "sarcoma": ["sarcoma"],
+            "tumor": ["tumor"]
+        },
+        "disease": {
+            "breast cancer": ["breast cancer"],
+            "carcinoma": ["carcinoma"],
+            "glioblastoma": ["glioblastoma"],
+            "leukemia": ["leukemia"],
+            "lymphoma": ["lymphoma"],
+            "sarcoma": ["sarcoma"],
+            "tumor": ["tumor"]
+        }
+    },
+    "draw": {
+        "letters": "ABCDEFGHIJK",
+        "poly": {
+            "bot_left": [0.054, 0.15],
+            "top_left": [0.44, 0.96],
+            "top_right": [0.56, 0.96],
+            "bot_right": [0.946, 0.15],
+            "color": "gray"
+        },
+        "ellipse": {
+            "center": [0.5, 0.15],
+            "width": 0.89,
+            "height": 0.3,
+            "color": "gray"
+        },
+        "fontsize": {
+            "header1": 20,
+            "header2": 10,
+            "footer": 7,
+            "side_label": 16,
+            "circle_name": 6.5,
+            "circle_date": 6.5
+        },
+        "circle": {
+            "top_left": [0.46, 0.91],
+            "pad": [0.01, 0.014],
+            "x_shift": 0.04,
+            "diameter": 0.07
+        },
+        "arrow_params": {
+            "facecolor": "black",
+            "width": 0.003,
+            "head_width": 0.015,
+            "head_length": 0.01
+        },
+        "label_params": {
+            "name": "Serif"
+        }
+    }
+}
