@@ -1,6 +1,6 @@
 {
     "main": {
-        "db_path": "C:/Users/blaurenc/Downloads/Cell_Line_Database_2019-11-01_BL.xlsx",
+        "db_path": "Cell_Line_Database_2019-11-01_BL.xlsx",
         "output_pdf_file_path": "celllinedb.pdf"
     },
     "clean": {
