@@ -41,7 +41,7 @@ def read_conf():
     
     
     logging.info("Reading in config")
-    with open('config.json', 'r') as conf_file:
+    with open('config.txt', 'r') as conf_file:
         conf = json.load(conf_file)
 
     return conf
@@ -135,11 +135,11 @@ def draw_pdf(conf, df):
     n_drawers = int(max(df['drawer']))
     
     # load the CHUV logo
-    conf['draw']['chuv_logo'] = plt.imread(conf['main']['logo_path'])
+    conf['draw']['chuv_logo'] = plt.imread(conf['draw']['logo_path'])
     
     # initialize the pdf file and get page size
     logging.info("Initializing the canvas of the PDF file")
-    with PdfPages(conf['main']['pdf_file_path']) as pdf:
+    with PdfPages(conf['main']['output_pdf_file_path']) as pdf:
     
         # create a page for each drawer
         logging.info("Drawing pages")
