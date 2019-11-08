@@ -1,7 +1,7 @@
 {
     "main": {
-        "db_path": "Cell_Line_Database_2019-11-01_BL.xlsx",
-        "output_pdf_file_path": "celllinedb.pdf"
+        "db_path": "N:/NUC/COMMUN/LABORATOIRES/LABO Recherche/BALAZS_celllinedb/Cell_Line_Database_2019-11-07_BL.xlsx",
+        "output_pdf_file_path": "N:/NUC/COMMUN/LABORATOIRES/LABO Recherche/BALAZS_celllinedb/celllinedb.pdf"
     },
     "clean": {
         "organism": {
@@ -49,13 +49,13 @@
             "top_left": [0.44, 0.96],
             "top_right": [0.56, 0.96],
             "bot_right": [0.946, 0.15],
-            "color": "gray"
+            "color": [0.95, 0.95, 0.95]
         },
         "ellipse": {
             "center": [0.5, 0.15],
-            "width": 0.89,
-            "height": 0.3,
-            "color": "gray"
+            "width": 0.895,
+            "height": 0.29,
+            "color": [0.95, 0.95, 0.95]
         },
         "fontsize": {
             "header1": 20,
@@ -63,7 +63,8 @@
             "footer": 7,
             "side_label": 16,
             "circle_name": 6.5,
-            "circle_date": 6.5
+            "circle_date": 6.5,
+            "circle_comment": 6.5
         },
         "circle": {
             "top_left": [0.46, 0.91],
