@@ -60,8 +60,8 @@ def read_data(conf):
     
     df = pd.read_excel(conf['main']['db_path'], 'DATABASE')
     df = df.dropna(0, 'all')
-    df = df.loc[:, ['Tiroir', 'Position', 'Name', 'Date_congel', 'Organism', 'Tissue', 'Disease']]
-    df.columns = ['drawer', 'pos', 'name', 'date', 'organism', 'tissue', 'disease']
+    df = df.loc[:, ['Tiroir', 'Position', 'Name', 'Date_congel', 'Comment', 'Organism', 'Tissue', 'Disease']]
+    df.columns = ['drawer', 'pos', 'name', 'date', 'comment', 'organism', 'tissue', 'disease']
     
     return df
 
@@ -191,13 +191,18 @@ def draw_page(conf, df, pdf, i_drawer):
     logging.info("Drawing base shape")
     poly_conf = draw_conf['poly']
     poly_coords = [poly_conf[c] for c in ['bot_left', 'top_left', 'top_right', 'bot_right']]
-    polygon = Polygon(poly_coords, True, facecolor=poly_conf['color'])
+    polygon = Polygon(poly_coords, True, linewidth=2, edgecolor='black', facecolor=poly_conf['color'])
     ax.add_patch(polygon)
-    
     # draw an ellipse at the bottom
     ell_conf = draw_conf['ellipse']
-    arc = Ellipse(ell_conf['center'], ell_conf['width'], ell_conf['height'], facecolor=ell_conf['color'])
-    ax.add_patch(arc)
+    ellipse = Ellipse(ell_conf['center'], ell_conf['width'], ell_conf['height'], linewidth=2, edgecolor='black', facecolor=ell_conf['color'])
+    ax.add_patch(ellipse)
+    # re-draw the polygon to hide the ellipse's inner borders
+    polygon = Polygon(poly_coords, True, facecolor=poly_conf['color'])
+    ax.add_patch(polygon)
+    # re-draw the ellipse to make the outer borders look good borders
+    ellipse = Ellipse(ell_conf['center'], ell_conf['width'], ell_conf['height'], facecolor=ell_conf['color'])
+    ax.add_patch(ellipse)
 
     # go row by row
     logging.info("Drawing circles and their content")
@@ -276,11 +281,11 @@ def draw_circle(conf, df, ax, i_drawer, i_row, i_col, n_circles):
         i_col = valid_indices.index(i_col)
     
     # fetch the right column of the database
-    df_row = df.query('drawer == {} & pos == "{}{}"'.format(i_drawer, conf['draw']['letters'][i_row], i_col + 1))
+    df_row = df.query('drawer == {} & pos == "{}{:02d}"'.format(i_drawer, conf['draw']['letters'][i_row], i_col + 1))
     
     # if no result or empty name field, leave the circle empty (white)
     if len(df_row) == 0 or len(df_row) == 1 and str(df_row.iloc[0]['name']) == 'nan':
-        logging.info('Nothing at D{}-{}{}'.format(i_drawer, conf['draw']['letters'][i_row], i_col + 1))
+        logging.info('Nothing at D{}-{}{:02d}'.format(i_drawer, conf['draw']['letters'][i_row], i_col + 1))
         circle_color = 'white'
         
     # if more than one result
@@ -294,19 +299,29 @@ def draw_circle(conf, df, ax, i_drawer, i_row, i_col, n_circles):
         # fetch the name and the date
         name = df_row.iloc[0]['name']
         date = df_row.iloc[0]['date']
+        comment = df_row.iloc[0]['comment']
+        
+        # clean comment
+        if comment is None or str(comment) == 'nan': comment = ''
+        
         # convert datetime objects to string
         if isinstance(date, datetime): date = date.strftime('%d-%m-%y')
-        logging.debug('Found {} ({}) at D{}-{}{}'.format(name, date, i_drawer,
+        logging.debug('Found {} ({}) at D{}-{}{:02d}'.format(name, date, i_drawer,
             conf['draw']['letters'][i_row], i_col + 1))
 
-        # write the content to the circle's center
-        plt.text(x, y + 0.01, name, fontsize=font_conf['circle_name'], horizontalalignment='center')
-        plt.text(x, y - 0.01, date, fontsize=font_conf['circle_date'], horizontalalignment='center')
+        # adapt font size
+        name_font_size = font_conf['circle_name']
         
-        circle_color = [0.9, 0.9, 0.9]
+        if len(name) > 6: name_font_size -= 1
+        # write the content to the circle's center
+        plt.text(x, y + 0.011, name, fontsize=name_font_size, horizontalalignment='center')
+        plt.text(x, y - 0.005, date, fontsize=font_conf['circle_date'], horizontalalignment='center')
+        plt.text(x, y - 0.018, comment, fontsize=font_conf['circle_comment'], horizontalalignment='center')
+        
+        circle_color = 'white'
       
     # draw the current circle
-    circ = Ellipse([x, y], cir_conf['diameter'], cir_conf['diameter'], linewidth=2, facecolor=circle_color)
+    circ = Ellipse([x, y], cir_conf['diameter'], cir_conf['diameter'], linewidth=1, edgecolor='black', facecolor=circle_color)
     ax.add_patch(circ)
     
     
