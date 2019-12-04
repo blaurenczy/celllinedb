@@ -30,15 +30,6 @@
             "lymphoma": ["lymphoma"],
             "sarcoma": ["sarcoma"],
             "tumor": ["tumor"]
-        },
-        "disease": {
-            "breast cancer": ["breast cancer"],
-            "carcinoma": ["carcinoma"],
-            "glioblastoma": ["glioblastoma"],
-            "leukemia": ["leukemia"],
-            "lymphoma": ["lymphoma"],
-            "sarcoma": ["sarcoma"],
-            "tumor": ["tumor"]
         }
     },
     "draw": {
